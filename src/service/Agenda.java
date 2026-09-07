@@ -85,5 +85,14 @@ public class Agenda {
         return false;
     }
 
+    // eliminar contacto
+    public boolean eliminarContacto(Contacto contacto) {
+        if (!existeContacto(contacto)) {
+            return false;
+        }
+        contactos.remove(contacto);
+        return true;
+    }
+
 }
 
