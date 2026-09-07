@@ -47,13 +47,28 @@ public class Main {
                     break;
 
                 case 6:
+                    System.out.println("Dame tu nombre: ");
+                    String nombre = scanner.nextLine();
+                    System.out.println("Dame tu apellido: " );
+                    String apellido = scanner.nextLine();
+                    System.out.println("Ingresa tu nuevo numero: ");
+                    String nuevoTelefono = scanner.nextLine();
+                    agenda.modificarTelefono(nombre, apellido, nuevoTelefono);
+
+
                     break;
 
                 case 7:
+                    if (agenda.agendaLlena()){
+                        System.out.println("La agenda esta llena");
+                    } else {
+                        System.out.println("Aún hay espacio en la agenda");
+                    }
 
                     break;
 
                 case 8:
+                    System.out.println("Espacios disponibles en la agenda: " + agenda.espaciosLibres());
                     break;
 
                 case 9:
