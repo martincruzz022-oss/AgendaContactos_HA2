@@ -1,5 +1,6 @@
 package app;
 
+import model.Contacto;
 import service.Agenda;
 
 import java.util.Scanner;
@@ -32,27 +33,84 @@ public class Main {
             switch (opcion) {
 
                 case 1:
+
+                    System.out.print("Nombre: ");
+                    String nombre = ns.nextLine();
+
+                    System.out.print("Apellido: ");
+                    String apellido = ns.nextLine();
+
+                    System.out.print("Teléfono: ");
+                    String telefono = ns.nextLine();
+
+                    Contacto nuevoContacto =
+                            new Contacto(nombre, apellido, telefono);
+
+                    agenda.añadirContacto(nuevoContacto);
+
                     break;
 
                 case 2:
+
+                    System.out.print("Nombre: ");
+                    nombre = ns.nextLine();
+
+                    System.out.print("Apellido: ");
+                    apellido = ns.nextLine();
+
+                    agenda.buscarContacto(nombre, apellido);
+
                     break;
 
                 case 3:
+
+                    System.out.print("Nombre: ");
+                    nombre = ns.nextLine();
+
+                    System.out.print("Apellido: ");
+                    apellido = ns.nextLine();
+
+                    Contacto contactoBuscar =
+                            new Contacto(nombre, apellido, "");
+
+                    if (agenda.existeContacto(contactoBuscar)) {
+                        System.out.println("El contacto existe.");
+                    } else {
+                        System.out.println("El contacto no existe.");
+                    }
+
                     break;
 
                 case 4:
+                    agenda.listarContactos();
                     break;
 
                 case 5:
+
+                    System.out.print("Nombre: ");
+                    nombre = ns.nextLine();
+
+                    System.out.print("Apellido: ");
+                    apellido = ns.nextLine();
+
+                    Contacto contactoEliminar =
+                            new Contacto(nombre, apellido, "");
+
+                    if (agenda.eliminarContacto(contactoEliminar)) {
+                        System.out.println("Contacto eliminado correctamente.");
+                    } else {
+                        System.out.println("No se encontró el contacto.");
+                    }
+
                     break;
 
                 case 6:
                     System.out.println("Dame tu nombre: ");
-                    String nombre = scanner.nextLine();
+                    nombre = ns.nextLine();
                     System.out.println("Dame tu apellido: " );
-                    String apellido = scanner.nextLine();
+                    apellido = ns.nextLine();
                     System.out.println("Ingresa tu nuevo numero: ");
-                    String nuevoTelefono = scanner.nextLine();
+                    String nuevoTelefono = ns.nextLine();
                     agenda.modificarTelefono(nombre, apellido, nuevoTelefono);
 
 

@@ -5,16 +5,14 @@ import java.util.Objects;
 public class Persona {
 
     private String nombre;
-    private  String apellido;
+    private String apellido;
 
     public Persona(String nombre, String apellido) {
         this.nombre = nombre;
         this.apellido = apellido;
-
     }
 
     public Persona() {
-
     }
 
     public String getNombre() {
@@ -33,7 +31,6 @@ public class Persona {
         this.apellido = apellido;
     }
 
-
     @Override
     public boolean equals(Object obj) {
 
@@ -51,8 +48,15 @@ public class Persona {
 
         Persona persona = (Persona) obj;
 
-        return nombre.equalsIgnoreCase(persona.nombre)
-                && apellido.equalsIgnoreCase(persona.apellido);
+        return Objects.equals(nombre, persona.nombre)
+                && Objects.equals(apellido, persona.apellido);
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+                nombre.toLowerCase(),
+                apellido.toLowerCase()
+        );
+    }
 }
