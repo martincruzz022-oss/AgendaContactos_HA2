@@ -72,5 +72,18 @@ public class Agenda {
         return contactos.size() >= size;
     }
 
+    //Modificar num. telefonico para un nombre (contacto) existente
+    public boolean modificarNumTel(String nombre, String nuevoNumTel) {
+        for (Contacto c : contactos) {
+            if (c.getNombre().equalsIgnoreCase(nombre)) {
+                c.setTelefono(nuevoNumTel);
+                System.out.println("Número de teléfono de:  \"" + c.getNombre() + "\" actualizado a " + nuevoNumTel + ".");
+                return true;
+            }
+        }
+        System.out.println("No existe ningún contacto para \"" + nombre + "\".");
+        return false;
+    }
+
 }
 
