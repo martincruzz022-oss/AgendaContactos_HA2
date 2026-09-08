@@ -4,6 +4,7 @@ import model.Contacto;
 import service.Agenda;
 
 import java.util.Scanner;
+import util.Validador;
 
 public class Main {
     public static void main(String[] args) {
@@ -27,21 +28,56 @@ public class Main {
             System.out.println("9. Salir");
             System.out.print("Seleccione una opción: ");
 
-            opcion = ns.nextInt();
-            ns.nextLine();
+            if (ns.hasNextInt()) {
+                opcion = ns.nextInt();
+                ns.nextLine();
+            } else {
+                System.out.println("Opcion no válida, debes ingresar un número del 1 al 9.");
+                ns.nextLine();
+                opcion = 0;
+            }
 
             switch (opcion) {
 
                 case 1:
 
                     System.out.print("Nombre: ");
-                    String nombre = ns.nextLine();
+                    String nombre = ns.nextLine().trim();
+
+                    if (!Validador.validarNombre(nombre)) {
+                        if (!Validador.validarTexto(nombre)) {
+                            System.out.println("El nombre no puede estar vacío.");
+                        } else {
+                            System.out.println("El nombre no puede contener números.");
+                        }
+                        break;
+                    }
 
                     System.out.print("Apellido: ");
-                    String apellido = ns.nextLine();
+                    String apellido = ns.nextLine().trim();
+
+                    if (!Validador.validarApellido(apellido)) {
+                        if (!Validador.validarTexto(apellido)) {
+                            System.out.println("El apellido no puede estar vacío.");
+                        } else {
+                            System.out.println("El apellido no puede contener números.");
+                        }
+                        break;
+                    }
 
                     System.out.print("Teléfono: ");
-                    String telefono = ns.nextLine();
+                    String telefono = ns.nextLine().trim();
+
+                    if (!Validador.validarTel(telefono)) {
+                        if (!Validador.validarTexto(telefono)) {
+                            System.out.println("El teléfono no puede estar vacío.");
+                        } else if (telefono.length() != 10) {
+                            System.out.println("El teléfono debe tener exactamente 10 dígitos.");
+                        } else {
+                            System.out.println("El teléfono solo puede contener números.");
+                        }
+                        break;
+                    }
 
                     Contacto nuevoContacto =
                             new Contacto(nombre, apellido, telefono);
@@ -106,13 +142,28 @@ public class Main {
 
                 case 6:
                     System.out.println("Dame tu nombre: ");
-                    nombre = ns.nextLine();
-                    System.out.println("Dame tu apellido: " );
-                    apellido = ns.nextLine();
-                    System.out.println("Ingresa tu nuevo numero: ");
-                    String nuevoTelefono = ns.nextLine();
-                    agenda.modificarTelefono(nombre, apellido, nuevoTelefono);
+                    nombre = ns.nextLine().trim();
 
+                    System.out.println("Dame tu apellido: ");
+                    apellido = ns.nextLine().trim();
+
+                    System.out.println("Ingresa tu nuevo numero: ");
+                    String nuevoTelefono = ns.nextLine().trim();
+
+                    if (!Validador.validarTel(nuevoTelefono)) {
+
+                        if (!Validador.validarTexto(nuevoTelefono)) {
+                            System.out.println("El teléfono no puede estar vacío.");
+                        } else if (nuevoTelefono.length() != 10) {
+                            System.out.println("El teléfono debe tener exactamente 10 dígitos.");
+                        } else {
+                            System.out.println("El teléfono solo puede contener números.");
+                        }
+
+                        break;
+                    }
+
+                    agenda.modificarTelefono(nombre, apellido, nuevoTelefono);
 
                     break;
 
